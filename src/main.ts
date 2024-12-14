@@ -1,18 +1,20 @@
 import { app, BrowserWindow } from "electron";
+import { runAsyncAction } from "./Utils/AsyncUtils.ts";
 
-const createWindow = () => {
-    const win = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            nodeIntegration: true,
-        },
-    });
+runAsyncAction(async function () {
+    const createWindow = async () => {
+        const win = new BrowserWindow({
+            width: 800,
+            height: 600,
+            webPreferences: {
+                nodeIntegration: true,
+            },
+        });
 
-    win.setMenu(null);
-    win.loadFile("dist/index.html");
-};
+        win.setMenu(null);
+        await win.loadFile("dist/index.html");
+    };
 
-app.whenReady().then(() => {
-    createWindow();
+    await app.whenReady();
+    await createWindow();
 });

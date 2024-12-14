@@ -13,7 +13,6 @@ export default tseslint.config(
     importPlugin.flatConfigs.recommended,
     ...storybook.configs['flat/recommended'],
     {
-        files: ['**/*.stories.@(ts|tsx|js|jsx|mjs|cjs)'],
         languageOptions: {
             parserOptions: {
                 projectService: true,
