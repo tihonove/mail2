@@ -18,6 +18,9 @@ export default tseslint.config(
                 projectService: true,
                 tsconfigRootDir: import.meta.dirname
             },
-        }
+        },
+        rules: {
+            'import/named': 'off',
+        },
     },
 );

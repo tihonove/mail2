@@ -11,7 +11,9 @@ runAsyncAction(async function () {
             },
         });
 
-        win.setMenu(null);
+        win.webContents.openDevTools();
+
+        // win.setMenu(null);
         await win.loadFile("dist/index.html");
     };
 
