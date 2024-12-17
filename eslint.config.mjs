@@ -1,9 +1,10 @@
-import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import globals from "globals";
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
 import eslintConfigPrettier from "eslint-config-prettier";
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import importPlugin from "eslint-plugin-import";
-import storybook from 'eslint-plugin-storybook'
+import storybook from "eslint-plugin-storybook";
 
 export default tseslint.config(
     eslint.configs.recommended,
@@ -11,16 +12,19 @@ export default tseslint.config(
     eslintPluginPrettierRecommended,
     eslintConfigPrettier,
     importPlugin.flatConfigs.recommended,
-    ...storybook.configs['flat/recommended'],
+    ...storybook.configs["flat/recommended"],
     {
-        languageOptions: {
-            parserOptions: {
+    languageOptions: {
+        globals: {
+            ...globals.node
+        },
+        parserOptions: {
                 projectService: true,
-                tsconfigRootDir: import.meta.dirname
+                tsconfigRootDir: import.meta.dirname,
             },
         },
         rules: {
-            'import/named': 'off',
+            "import/named": "off",
         },
-    },
+    }
 );

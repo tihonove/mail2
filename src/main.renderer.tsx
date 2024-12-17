@@ -1,6 +1,6 @@
-import * as React from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./Components/App.tsx";
+import "./Styles/Reset.css";
 
 const rootElement = document.createElement("div");
 document.body.appendChild(rootElement);
