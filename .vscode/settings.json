@@ -2,11 +2,11 @@
     "typescript.preferences.importModuleSpecifier": "relative",
     "typescript.preferences.importModuleSpecifierEnding": "js",
     "files.exclude": {
-        "dist": true
+        "**/coverage": true,
+        "**/dist": true
     },
     "search.exclude": {
-        "dist": true,
-        "dist/**": true
+        "**/dist": true
     },
     "files.watcherExclude": {
         "dist/**": true

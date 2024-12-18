@@ -1,9 +1,9 @@
-import { styled, ThemeProvider, DefaultTheme } from "styled-components";
-import { lightTheme, darkTheme } from "../Styles/Themes.ts";
-import { atom, useAtom } from "jotai";
 import * as remote from "@electron/remote";
-import { MainWindow } from "./MainWindow.tsx";
+import { atom, useAtom } from "jotai";
+import { DefaultTheme, ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "../Styles/Themes.ts";
 import { GlobalStyle } from "./GlobalStyle.tsx";
+import { MainWindow } from "./MainWindow.tsx";
 
 enum ThemeName {
     Light = "Light",
@@ -23,70 +23,6 @@ function resolveTheme(theme: ThemeName | undefined): DefaultTheme {
     }
 }
 
-const CustomTitleBar = () => {
-    const minimize = () => {
-        remote.getCurrentWindow().minimize();
-    };
-    const close = () => {
-        remote.getCurrentWindow().close();
-    };
-
-    return (
-        <div
-            style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                backgroundColor: "#333",
-                color: "#fff",
-                padding: "5px 10px",
-                WebkitAppRegion: "drag", // Перетаскивание окна
-            }}
-        >
-            <div style={{ WebkitAppRegion: "no-drag" }}>
-                {" "}
-                {/* Отключение перетаскивания для кнопок */}
-                My App
-            </div>
-            <div style={{ display: "flex", gap: "10px" }}>
-                <button
-                    onClick={minimize}
-                    style={{
-                        background: "red",
-                        color: "#fff",
-                        border: "none",
-                        cursor: "pointer",
-                        WebkitAppRegion: "no-drag", // Исключить из области перетаскивания
-                    }}
-                >
-                    _
-                </button>
-                <button
-                    onClick={close}
-                    style={{
-                        background: "red",
-                        color: "#fff",
-                        border: "none",
-                        cursor: "pointer",
-                        WebkitAppRegion: "no-drag", // Исключить из области перетаскивания
-                    }}
-                >
-                    X
-                </button>
-            </div>
-        </div>
-    );
-};
-
-const ToggleButton = styled.button`
-    background: ${(props) => props.theme.background};
-    color: ${(props) => props.theme.color};
-    border: 1px solid ${(props) => props.theme.color};
-    padding: 10px;
-    cursor: pointer;
-    margin: 20px;
-`;
-
 export function App(): React.JSX.Element {
     const [theme, setTheme] = useAtom(themeAtom);
 
@@ -94,11 +30,20 @@ export function App(): React.JSX.Element {
         setTheme(theme === ThemeName.Light ? ThemeName.Dark : ThemeName.Light);
     };
 
+    const handleClose = () => {
+        remote.getCurrentWindow().close();
+    };
+    const handleMinimize = () => {
+        remote.getCurrentWindow().minimize();
+    };
+    const handleMaximize = () => {
+        remote.getCurrentWindow().maximize();
+    };
+
     return (
         <ThemeProvider theme={resolveTheme(theme)}>
             <GlobalStyle />
-            {/* <CustomTitleBar /> */}
-            <MainWindow />
+            <MainWindow onClose={handleClose} onMinimize={handleMinimize} onMaximize={handleMaximize} />
         </ThemeProvider>
     );
 }

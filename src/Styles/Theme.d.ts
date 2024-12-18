@@ -9,4 +9,5 @@ declare module "styled-components" {
             color: string;
         };
     }
+
 }

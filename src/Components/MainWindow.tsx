@@ -1,9 +1,19 @@
 import { styled } from "styled-components";
+import { TitleBar } from "./TitleBar.tsx";
 
-export function MainWindow(): React.JSX.Element {
+interface MainWindowProps {
+    onMinimize: () => void;
+    onMaximize: () => void;
+    onClose: () => void;
+}
+
+export function MainWindow(props: MainWindowProps): React.JSX.Element {
+    const { onMinimize, onMaximize, onClose } = props;
+
     return (
         <Root>
-            <TitleBar></TitleBar>
+            <TitleBar onMinimize={onMinimize} onMaximize={onMaximize} onClose={onClose} />
+            <TransparentOverlay />
             <Content>
                 <Column1>Column 1</Column1>
                 <Column2>Column 2</Column2>
@@ -13,33 +23,25 @@ export function MainWindow(): React.JSX.Element {
     );
 }
 
-function TitleBar(): React.JSX.Element {
-    return (
-        <TitleBarContainer>
-            <Title>My Application</Title>
-        </TitleBarContainer>
-    );
-}
-
-const TitleBarContainer = styled.div`
-    height: 30px;
-    background-color: ${(props) => props.theme.titleBar.background};
-    color: ${(props) => props.theme.titleBar.color};
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-`;
-
-const Title = styled.h1`
-    margin: 0;
-`;
-
 const Root = styled.div`
+    box-sizing: border-box;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+`;
+
+const TransparentOverlay = styled.div`
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.4);
 `;
 
 const Content = styled.div`

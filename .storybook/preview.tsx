@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/react";
 import "../src/Styles/Reset.css";
 import { ThemeProvider } from "styled-components";
-import { darkTheme } from "../src/Styles/Themes.ts";
+import { darkTheme, lightTheme } from "../src/Styles/Themes.ts";
 import { GlobalStyle } from "../src/Components/GlobalStyle.tsx";
 
 const preview: Preview = {
@@ -15,7 +15,7 @@ const preview: Preview = {
     },
     decorators: [
         (Story) => (
-            <ThemeProvider theme={darkTheme}>
+            <ThemeProvider theme={lightTheme}>
                 <GlobalStyle />
                 <Story />
             </ThemeProvider>
