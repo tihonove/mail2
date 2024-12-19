@@ -1,5 +1,7 @@
 import { styled } from "styled-components";
 import { TitleBar } from "./TitleBar.tsx";
+import { AccountTree } from "./AccountTree.tsx";
+import { step } from "../Styles/Themes.ts";
 
 interface MainWindowProps {
     onMinimize: () => void;
@@ -15,7 +17,28 @@ export function MainWindow(props: MainWindowProps): React.JSX.Element {
             <TitleBar onMinimize={onMinimize} onMaximize={onMaximize} onClose={onClose} />
             <TransparentOverlay />
             <Content>
-                <Column1>Column 1</Column1>
+                <AccountTreeColumn>
+                    <AccountTree
+                        accounts={[
+                            {
+                                id: "1",
+                                name: "Kontur",
+                                folders: [
+                                    { id: "Inbox", name: "Inbox", unreadMessageCount: 1 },
+                                    { id: "Sent", name: "Sent", unreadMessageCount: 0 },
+                                ],
+                            },
+                            {
+                                id: "2",
+                                name: "Hotmail",
+                                folders: [
+                                    { id: "Inbox", name: "Inbox", unreadMessageCount: 0 },
+                                    { id: "Sent", name: "Sent", unreadMessageCount: 0 },
+                                ],
+                            },
+                        ]}
+                    />
+                </AccountTreeColumn>
                 <Column2>Column 2</Column2>
                 <Column3>Column 3</Column3>
             </Content>
@@ -48,8 +71,9 @@ const Content = styled.div`
     display: flex;
 `;
 
-const Column1 = styled.div`
+const AccountTreeColumn = styled.div`
     flex: 0 1 200px;
+    padding: ${step(2)};
 `;
 
 const Column2 = styled.div`
