@@ -23,6 +23,22 @@ function resolveTheme(theme: ThemeName | undefined): DefaultTheme {
     }
 }
 
+interface AccountInfo {
+    name: string;
+    imap: ImapCredentials;
+    smtp: SmtpCredentials;
+}
+
+interface Mail2Config {
+    accounts: AccountInfo;
+}
+
+async function readConfig(): Promise<Mail2Config> {
+    return {
+
+    }
+}
+
 export function App(): React.JSX.Element {
     const [theme, setTheme] = useAtom(themeAtom);
 

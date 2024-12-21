@@ -14,7 +14,7 @@ time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
+    font-size: 14px;
     font: inherit;
     vertical-align: baseline;
     font-family: 'Segoe UI', 'Ubuntu', 'Ubuntu Font', Tahoma, Geneva, Verdana, sans-serif;
@@ -25,7 +25,7 @@ footer, header, hgroup, menu, nav, section {
     display: block;
 }
 body {
-    line-height: 1;
+    line-height: 20px;
 }
 ol, ul {
     list-style: none;

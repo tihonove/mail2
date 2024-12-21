@@ -1,3 +1,6 @@
+import type { ImapCredentials } from "../src/Mail/Imap/ImapCredentials.ts";
+import type { SmtpCredentials } from "../src/Mail/Smtp/SmtpCredentials.ts";
+
 export const testMailCredentials = {
     testerMailAddress: {
         name: "Tester",
@@ -10,9 +13,9 @@ export const testMailCredentials = {
         secure: true, // true for 465, false for other ports
         auth: {
             user: "testermailnew",
-            pass: "rxpxwtypkcbldobx",
+            password: "rxpxwtypkcbldobx",
         },
-    },
+    } as SmtpCredentials,
 
     imapCredentials: {
         host: "imap.ya.ru",
@@ -20,8 +23,7 @@ export const testMailCredentials = {
         secure: true, // true for 993, false for other ports
         auth: {
             user: "testermailnew",
-            pass: "rxpxwtypkcbldobx",
+            password: "rxpxwtypkcbldobx",
         },
-    },
+    } as ImapCredentials,
 };
-

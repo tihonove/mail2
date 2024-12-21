@@ -2,6 +2,8 @@ import { styled } from "styled-components";
 import { TitleBar } from "./TitleBar.tsx";
 import { AccountTree } from "./AccountTree.tsx";
 import { step } from "../Styles/Themes.ts";
+import { MessageList } from "./MessageList.tsx";
+import { MessageViewer } from "./MessageViewer.tsx";
 
 interface MainWindowProps {
     onMinimize: () => void;
@@ -39,8 +41,40 @@ export function MainWindow(props: MainWindowProps): React.JSX.Element {
                         ]}
                     />
                 </AccountTreeColumn>
-                <Column2>Column 2</Column2>
-                <Column3>Column 3</Column3>
+                <Column2>
+                    <MessageList
+                        value={[
+                            {
+                                id: "1",
+                                addressTitle: "",
+                                subject: "Hello",
+                                date: new Date(),
+                                preview: "Hello, world!",
+                                unread: true,
+                            },
+                            {
+                                id: "2",
+                                addressTitle: "",
+                                subject: "Hello",
+                                date: new Date(),
+                                preview: "Hello, world!",
+                                unread: false,
+                            },
+                        ]}
+                    />
+                </Column2>
+                <Column3>
+                    <MessageViewer
+                        value={{
+                            id: "2",
+                            addressTitle: "",
+                            subject: "Hello",
+                            date: new Date(),
+                            body: "Hello, world!",
+                            unread: false,
+                        }}
+                    />
+                </Column3>
             </Content>
         </Root>
     );

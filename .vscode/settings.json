@@ -10,5 +10,7 @@
     },
     "files.watcherExclude": {
         "dist/**": true
-    }
+    },
+    "files.eol": "\n",
+    "typescript.preferences.preferTypeOnlyAutoImports": true
 }

@@ -6,6 +6,7 @@
   "scripts": {
     "typecheck": "tsc",
     "start": "electron .",
+    "test": "jest",
     "build": "webpack --mode=development",
     "build-start": "webpack --mode=development; electron .",
     "storybook": "storybook dev -p 6006",
@@ -60,6 +61,7 @@
     "custom-electron-titlebar": "^4.2.8",
     "html-webpack-plugin": "^5.6.3",
     "imap-simple": "^5.1.0",
+    "ix": "^7.0.0",
     "jotai": "^2.10.3",
     "nodemailer": "^6.9.16",
     "react": "^19.0.0",

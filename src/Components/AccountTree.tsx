@@ -33,9 +33,7 @@ export function AccountTree({ accounts }: AccountTreeProps) {
                     <GroupListRoot>
                         {account.folders.map((folder) => (
                             <Folder key={folder.id}>
-                                <HiIcon icon={<HiOutlineInbox />} />
-                                {" "}
-                                {folder.name} ({folder.unreadMessageCount})
+                                <HiIcon icon={<HiOutlineInbox />} /> {folder.name} ({folder.unreadMessageCount})
                             </Folder>
                         ))}
                     </GroupListRoot>
@@ -46,7 +44,7 @@ export function AccountTree({ accounts }: AccountTreeProps) {
 }
 
 function HiIcon({ icon }: { icon: React.JSX.Element }) {
-    return <>{React.cloneElement(icon, { style: { marginBottom: -2, } })}</>;
+    return <>{React.cloneElement(icon, { style: { marginBottom: -2 } })}</>;
 }
 
 const Root = styled.nav``;

@@ -1,48 +1,45 @@
 import nodemailer from "nodemailer";
-import imaps from "imap-simple";
 import { testMailCredentials } from "./TestMailCredentials.ts";
+import { createImapConnection } from "../src/Mail/Imap/ImapSimple.ts";
 
-test("send and receive email", async () => {
-    jest.setTimeout(60000);
+jest.setTimeout(60000);
+describe("SMTP demo", () => {
+    test("send and receive email", async () => {
+        // Настройка SMTP-транспорта
+        const transporter = nodemailer.createTransport({
+            host: testMailCredentials.smtpCredentials.host,
+            port: testMailCredentials.smtpCredentials.port,
+            secure: testMailCredentials.smtpCredentials.secure,
+            auth: {
+                user: testMailCredentials.smtpCredentials.auth.user,
+                pass: testMailCredentials.smtpCredentials.auth.password,
+            },
+        });
 
-    // Настройка SMTP-транспорта
-    const transporter = nodemailer.createTransport(testMailCredentials.smtpCredentials);
+        // Определение письма
+        const mailOptions = {
+            from: `"${testMailCredentials.testerMailAddress.name}" <${testMailCredentials.testerMailAddress.address}>`,
+            to: testMailCredentials.testerMailAddress.address,
+            subject: "Test Email",
+            text: "Hello, this is a test email!",
+            html: "<b>Hello, this is a test email!</b>",
+        };
 
-    // Определение письма
-    const mailOptions = {
-        from: `"${testMailCredentials.testerMailAddress.name}" <${testMailCredentials.testerMailAddress.address}>`,
-        to: testMailCredentials.testerMailAddress.address,
-        subject: "Test Email",
-        text: "Hello, this is a test email!",
-        html: "<b>Hello, this is a test email!</b>",
-    };
+        // Отправка письма
+        await transporter.sendMail(mailOptions);
 
-    // Отправка письма
-    await transporter.sendMail(mailOptions);
+        // Ожидание получения письма
+        const connection = await createImapConnection(testMailCredentials.imapCredentials);
+        await connection.openBox("INBOX");
 
-    // Настройка IMAP для получения почты
-    const imapConfig = {
-        imap: {
-            user: testMailCredentials.imapCredentials.auth.user,
-            password: testMailCredentials.imapCredentials.auth.pass,
-            host: testMailCredentials.imapCredentials.host,
-            port: testMailCredentials.imapCredentials.port,
-            tls: testMailCredentials.imapCredentials.secure,
-            authTimeout: 3000,
-        },
-    };
+        const searchCriteria = ["UNSEEN"];
+        const fetchOptions = { bodies: ["HEADER", "TEXT"], struct: true };
 
-    // Ожидание получения письма
-    const connection = await imaps.connect(imapConfig);
-    await connection.openBox("INBOX");
+        const messages = await connection.search(searchCriteria, fetchOptions);
+        const latestMessage = messages[messages.length - 1];
+        console.log(latestMessage);
 
-    const searchCriteria = ["UNSEEN"];
-    const fetchOptions = { bodies: ["HEADER", "TEXT"], struct: true };
-
-    const messages = await connection.search(searchCriteria, fetchOptions);
-    const latestMessage = messages[messages.length - 1];
-    console.log(latestMessage);
-
-    expect(latestMessage.parts[0].body.subject[0]).toBe("Test Email");
-    connection.end();
+        expect(latestMessage.parts[0].body.subject[0]).toBe("Test Email");
+        connection.end();
+    });
 });
