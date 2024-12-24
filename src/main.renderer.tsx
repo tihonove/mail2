@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { App } from "./Components/App.tsx";
+import { App } from "./Containers/App.tsx";
 import "./Styles/Reset.css";
 
 const rootElement = document.createElement("div");

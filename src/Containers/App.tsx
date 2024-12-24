@@ -2,8 +2,8 @@ import * as remote from "@electron/remote";
 import { atom, useAtom } from "jotai";
 import { DefaultTheme, ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "../Styles/Themes.ts";
-import { GlobalStyle } from "./GlobalStyle.tsx";
-import { MainWindow } from "./MainWindow.tsx";
+import { GlobalStyle } from "../Components/GlobalStyle.tsx";
+import { MainWindow } from "../Components/MainWindow.tsx";
 
 enum ThemeName {
     Light = "Light",
@@ -55,6 +55,8 @@ export function App(): React.JSX.Element {
     const handleMaximize = () => {
         remote.getCurrentWindow().maximize();
     };
+
+    
 
     return (
         <ThemeProvider theme={resolveTheme(theme)}>

@@ -1,5 +1,6 @@
 {
-    "include": ["jest.config.js", "src", "test", "src/**/*.d.ts", ".storybook/**/*.ts", ".", ".storybook/**/*.tsx"],
+    "include": ["jest.config.js", "src/**/*.d.ts", ".storybook/**/*.ts", ".", ".storybook/**/*.tsx"],
+    "exclude": ["node_modules", "dist", "coverage", ".vscode"],
     "compilerOptions": {
         /* Visit https://aka.ms/tsconfig to read more about this file */
 
