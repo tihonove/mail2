@@ -5,6 +5,7 @@
   "main": "dist/main.dist.js",
   "scripts": {
     "typecheck": "tsc",
+    "lint": "eslint src test",
     "start": "electron .",
     "test": "jest",
     "build": "webpack --mode=development",

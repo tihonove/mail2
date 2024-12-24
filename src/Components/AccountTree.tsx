@@ -1,5 +1,5 @@
 import * as React from "react";
-import { HiInbox, HiMiniChevronRight, HiOutlineInbox } from "react-icons/hi2";
+import { HiMiniChevronRight, HiOutlineInbox } from "react-icons/hi2";
 import { styled } from "styled-components";
 import { theme } from "../Styles/Themes.ts";
 

@@ -39,6 +39,7 @@ describe("SMTP demo", () => {
         const latestMessage = messages[messages.length - 1];
         console.log(latestMessage);
 
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         expect(latestMessage.parts[0].body.subject[0]).toBe("Test Email");
         connection.end();
     });

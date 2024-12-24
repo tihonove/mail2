@@ -8,6 +8,24 @@
 			"problemMatcher": [],
 			"label": "npm: build-start",
 			"detail": "webpack --mode=development & electron ."
+		},
+		{
+			"type": "npm",
+			"script": "lint",
+			"problemMatcher": [
+				"$eslint-compact"
+			],
+			"label": "npm: lint",
+			"detail": "eslint src test"
+		},
+		{
+			"type": "npm",
+			"script": "typecheck",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"label": "npm: typecheck",
+			"detail": "tsc"
 		}
 	]
 }

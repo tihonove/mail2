@@ -23,28 +23,26 @@ function resolveTheme(theme: ThemeName | undefined): DefaultTheme {
     }
 }
 
-interface AccountInfo {
-    name: string;
-    imap: ImapCredentials;
-    smtp: SmtpCredentials;
-}
+// interface AccountInfo {
+//     name: string;
+//     imap: ImapCredentials;
+//     smtp: SmtpCredentials;
+// }
 
-interface Mail2Config {
-    accounts: AccountInfo;
-}
+// interface Mail2Config {
+//     accounts: AccountInfo;
+// }
 
-async function readConfig(): Promise<Mail2Config> {
-    return {
-
-    }
-}
+// async function readConfig(): Promise<Mail2Config> {
+//     return {};
+// }
 
 export function App(): React.JSX.Element {
-    const [theme, setTheme] = useAtom(themeAtom);
+    const [theme] = useAtom(themeAtom);
 
-    const handleToggleTheme = () => {
-        setTheme(theme === ThemeName.Light ? ThemeName.Dark : ThemeName.Light);
-    };
+    // const handleToggleTheme = () => {
+    //     setTheme(theme === ThemeName.Light ? ThemeName.Dark : ThemeName.Light);
+    // };
 
     const handleClose = () => {
         remote.getCurrentWindow().close();
@@ -55,8 +53,6 @@ export function App(): React.JSX.Element {
     const handleMaximize = () => {
         remote.getCurrentWindow().maximize();
     };
-
-    
 
     return (
         <ThemeProvider theme={resolveTheme(theme)}>

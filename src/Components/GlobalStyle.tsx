@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { theme } from "../Styles/Themes.ts";
 
 export const GlobalStyle = createGlobalStyle`
     html {
@@ -9,8 +10,8 @@ export const GlobalStyle = createGlobalStyle`
     body {
         padding: 0;
         margin: 0;
-        background-color: ${(props) => props.theme.background};
-        color: ${(props) => props.theme.color};
+        background-color: ${theme.background};
+        color: ${theme.color};
         transition: all 0.3s linear;
     }
 `;
