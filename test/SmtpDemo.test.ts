@@ -3,6 +3,7 @@ import { testMailCredentials } from "./TestMailCredentials.ts";
 import { createImapConnection } from "../src/Mail/Imap/ImapSimple.ts";
 
 jest.setTimeout(60000);
+
 describe("SMTP demo", () => {
     test("send and receive email", async () => {
         // Настройка SMTP-транспорта
@@ -32,7 +33,7 @@ describe("SMTP demo", () => {
         const connection = await createImapConnection(testMailCredentials.imapCredentials);
         await connection.openBox("INBOX");
 
-        const searchCriteria = ["UNSEEN"];
+        const searchCriteria = ["ALL"];
         const fetchOptions = { bodies: ["HEADER", "TEXT"], struct: true };
 
         const messages = await connection.search(searchCriteria, fetchOptions);
